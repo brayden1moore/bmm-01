@@ -1,0 +1,123 @@
+        :root {
+            --primary-color: rgb(220, 220, 0);
+            --secondary-color: rgb(21, 197, 180);
+        }
+        body {
+            background-color: black;
+            font-family: Helvetica;
+            color: var(--primary-color);
+            width: 100vw;  
+        }
+        footer {
+            display: flex;
+            margin-left: 10px;
+            margin-top: 10px;
+            justify-content: left;
+        }
+        #logo-img {
+            width: 100px;
+            height: auto;
+        }
+        #header {
+            margin-top: 10px;
+            margin-left: 10px;
+            display: inline-flex;
+            width: auto;
+            align-items: center;
+        }
+        #welcome {
+            font-size: 97.5px;
+            margin: 0;
+            margin-left: 10px;
+        }
+        .dividing-line {
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 100%;
+            border-bottom: 1px solid ;
+        }
+        #content {
+            display: grid;
+            margin: 10px;
+            justify-items: left;
+            justify-content: left;
+        }
+        #link-container {
+            height: 100%;
+            border: 1px solid var(--primary-color);
+        }
+        p {
+            font-family: Courier;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            margin-top: 10px;
+        }
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        #nav {
+            margin: 10px;
+            padding: 0;
+            display: flex;
+            height: auto;
+        }
+        #nav-item {
+            cursor: pointer;
+            color: var(--secondary-color);
+            font-family: courier;
+            margin-right: 10px;
+            list-style: none;
+            border: 1px solid var(--secondary-color);
+            padding: 10px;
+        }
+        #nav-item:hover {
+            background-color: var(--secondary-color);
+            color: black;
+        }
+        .image-div {
+            width: 100%;
+            overflow-x: scroll;
+            display: inline-flex;
+        }
+        .image {
+            height: 200px;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        ::-webkit-scrollbar {
+            height: 5px;
+            width: 5px;
+            cursor: pointer;
+            background: transparent;
+            border-radius: 5px;
+        }
+        .wav {
+            margin-left: 10px;
+            background-color: var(--primary-color);
+        }
+        ::-webkit-media-controls-panel {
+            background: var(--primary-color);
+        }
+        .wav-container {
+            justify-content: space-between;
+            width: 455px;
+            padding-left: 10px;
+            border: 1px solid var(--primary-color);
+            font-family: courier;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .about {
+            color: var(--secondary-color);
+            font-family: Courier;
+            margin-top: 10px;
+        }
+        .text-link {
+            margin-top: 10px;
+            font-family: courier;
+            color: var(--secondary-color);
+            text-decoration: underline !important;
+        }
