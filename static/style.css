@@ -38,6 +38,7 @@
         }
         #content {
             display: grid;
+            width: 100%;
             margin: 10px;
             justify-items: left;
             justify-content: left;
