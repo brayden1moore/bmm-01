@@ -133,6 +133,7 @@
                 height: 100px;
             }
             body {
+                width: 95vw;
                 font-size: small;
             }
         }
