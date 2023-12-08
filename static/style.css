@@ -121,3 +121,18 @@
             color: var(--secondary-color);
             text-decoration: underline !important;
         }
+
+        @media only screen and (width <= 798px) {
+            #welcome {
+                font-size: 50px;
+            }
+            #logo-img {
+                width: 50px;
+            }
+            .image {
+                height: 100px;
+            }
+            body {
+                font-size: small;
+            }
+        }
