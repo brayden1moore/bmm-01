@@ -101,7 +101,7 @@
         }
         .wav-container {
             justify-content: space-between;
-            width: 500px;
+            width: 525px;
             padding-left: 10px;
             border: 1px solid var(--primary-color);
             font-family: courier;
