@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin:0;
+            overflow: hidden;
+        }
+        canvas {
+            background:#000;
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+<script>
+    const canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    const gridSize = 30; 
+    const attraction = 0.06;
+    const attractionRadius = gridSize * 7;
+    const dots = [];
+    const lerp = (a, b, n) => (1 - n) * a + n * b;
+    const ease = (t) => --t * t * t + 1;
+
+    let lastX = 0
+    let lastY = 0
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const handleMove = (e) => {
+        if (e.buttons !== 1) return;
+        e.preventDefault(); 
+        
+        const calculateColor = (dist) => { 
+            const hue = (dist / attractionRadius) * 360; 
+            return `hsl(${hue*360}, 100%, 50%)`; 
+        };
+
+        const updateDots = (clientX, clientY) => {
+            dots.forEach(dot => {
+                const dx = clientX - dot.ox;
+                const dy = clientY - dot.oy;          
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                const distanceToMoveX = dx * attraction * dist/attractionRadius;
+                const distanceToMoveY = dy * attraction * dist/attractionRadius;
+
+                const newX = dot.x + distanceToMoveX;
+                const newY = dot.y + distanceToMoveY;
+
+                if (dist < attractionRadius) {
+                    dot.x = newX;
+                    dot.y = newY;
+                    dot.color = 'yellow';
+                }
+                else { 
+                    dot.color = 'white';
+                }
+
+            });
+        };
+        
+        if (e.touches) {
+            for (let touch of e.touches) {
+                updateDots(touch.clientX, touch.clientY);
+            }
+        } else {
+            updateDots(e.clientX, e.clientY);
+        }
+
+    };
+
+    const resetDotsColor = () => {
+        dots.forEach(dot => {
+            dot.color = 'white';
+        });
+    };
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        dots.forEach(dot => {
+            ctx.beginPath();
+            ctx.arc(dot.x, dot.y, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = dot.color || 'white';
+            dot.x = lerp(dot.x, dot.ox, 0.1);
+            dot.y = lerp(dot.y, dot.oy, 0.1);
+            
+        });
+        requestAnimationFrame(draw);
+    }
+
+    const initializeDots = () => {
+        dots.length = 0;
+        for (let y = 0; y < canvas.height; y += gridSize) {
+            for (let x = 0; x < canvas.width; x += gridSize) {
+                dots.push({ x: x, y: y, ox: x, oy: y, color: 'white' });
+            }
+        }
+    };
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initializeDots();
+    });
+
+    canvas.addEventListener('mousemove', handleMove);
+    canvas.addEventListener('touchmove', handleMove);
+
+    canvas.addEventListener('mouseup', resetDotsColor);
+    canvas.addEventListener('touchend', resetDotsColor);
+
+    initializeDots();
+    draw();
+
+</script>
+</html>
