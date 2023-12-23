@@ -12,7 +12,7 @@
 
         canvas {
             background:black;
-            height: 85vh;
+            height: 95vh;
             width: 100vw;
         }
 
@@ -67,6 +67,12 @@
         /* FF */
         input[type="range"]::-moz-range-progress {
             background-color: yellow; 
+        }
+
+        @media only screen and (orientation: portrait) {
+            canvas {
+                height: 85vh;
+            }
         }
 
     </style>
