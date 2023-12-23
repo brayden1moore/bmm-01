@@ -6,80 +6,152 @@
     <title>Document</title>
     <style>
         body {
-            margin:0;
+            background-color: black;
             overflow: hidden;
         }
         canvas {
-            background:#000;
+            background:black;
         }
+        #adjuster-div {
+            opacity: 1;
+            transition: 0.2s;
+            position: relative;
+            z-index: 100;
+            height: 50px;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-evenly;
+            font-family: monospace;
+            color: yellow;
+            margin-top: 15px;
+        }
+        #adjuster-div:hover {
+            opacity: 1;
+        }
+
+        :root {
+            --slider-width: 30vw;
+            --slider-height: 10px;
+        }
+
+        input[type='range'] {
+            cursor: ew-resize;
+            overflow: hidden;
+        }
+
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+        input[type='range'] {
+            width: var(--slider-width);
+            appearance: none;
+            -webkit-appearance: none;
+            background-color: #161616;
+            border: solid 1px yellow;
+        }
+        input[type='range']::-webkit-slider-runnable-track {
+            height: var(--slider-height);
+            -webkit-appearance: none;
+            color: #13bba4;
+            margin-top: -1px;
+        }
+        input[type='range']::-webkit-slider-thumb {
+            width: 0px;
+            -webkit-appearance: none;
+            height: var(--slider-height);
+            box-shadow: calc(-1 * var(--slider-width)) 0 0 var(--slider-width) yellow;
+        }
+        }
+
+        /* FF */
+        input[type="range"]::-moz-range-progress {
+            background-color: yellow; 
+        }
+
     </style>
 </head>
 <body>
-    
+    <canvas id="canvas"></canvas>
+    <div id="adjuster-div">
+        <label><input type="range" id="gridSizeSlider" min="10" max="100" value="30"></label>
+        <label><input type="range" id="attractionSlider" min="-1" max="1" step="0.01" value="0.06"></label>
+        <label><input type="range" id="attractionRadiusSlider" min="1" max="25" step="0.1" value="7"></label>
+    </div>
+
 </body>
 <script>
-    const canvas = document.createElement('canvas');
-    document.body.appendChild(canvas);
+    const adjuster = document.getElementById('adjuster-div');
+    const gridSizeSlider = document.getElementById('gridSizeSlider');
+    const attractionSlider = document.getElementById('attractionSlider');
+    const attractionRadiusSlider = document.getElementById('attractionRadiusSlider');
+    const dark = '#545404';
+
+    let gridSize = parseInt(gridSizeSlider.value); 
+    let attraction = parseFloat(attractionSlider.value);
+    let attractionRadiusMultiplier = parseInt(attractionRadiusSlider.value);
+    let attractionRadius = gridSize * attractionRadiusMultiplier;
+
+    gridSizeSlider.addEventListener('input', () => {
+        gridSize = parseInt(gridSizeSlider.value);
+        initializeDots();
+    });
+
+    attractionSlider.addEventListener('input', () => {
+        attraction = parseFloat(attractionSlider.value);
+    });
+
+    attractionRadiusSlider.addEventListener('input', () => {
+        attractionRadiusMultiplier = parseInt(attractionRadiusSlider.value);
+        attractionRadius = gridSize * attractionRadiusMultiplier;
+    });
+
+    const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-    const gridSize = 30; 
-    const attraction = 0.06;
-    const attractionRadius = gridSize * 7;
     const dots = [];
     const lerp = (a, b, n) => (1 - n) * a + n * b;
     const ease = (t) => --t * t * t + 1;
 
-    let lastX = 0
-    let lastY = 0
-
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const handleMove = (e) => {
-        if (e.type === 'mousemove' && e.buttons !== 1) return;
-        e.preventDefault(); 
-        
-        const calculateColor = (dist) => { 
-            const hue = (dist / attractionRadius) * 360; 
-            return `hsl(${hue*360}, 100%, 50%)`; 
-        };
-
-        const updateDots = (clientX, clientY) => {
+    const updateDots = (clientX, clientY) => {
             dots.forEach(dot => {
                 const dx = clientX - dot.ox;
                 const dy = clientY - dot.oy;          
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
-                const distanceToMoveX = dx * attraction * dist/attractionRadius;
-                const distanceToMoveY = dy * attraction * dist/attractionRadius;
+                const distanceToMoveX = dx * attraction * (dist/attractionRadius);
+                const distanceToMoveY = dy * attraction * (dist/attractionRadius);
 
-                const newX = dot.x + distanceToMoveX;
-                const newY = dot.y + distanceToMoveY;
-
+                newX = dot.x + distanceToMoveX;
+                newY = dot.y + distanceToMoveY;
+                
                 if (dist < attractionRadius) {
                     dot.x = newX;
                     dot.y = newY;
                     dot.color = 'yellow';
                 }
                 else { 
-                    dot.color = 'white';
+                    dot.color = dark;
                 }
 
             });
         };
+
+    const handleMove = (e) => {
+        e.preventDefault(); 
         
         if (e.touches) {
             for (let touch of e.touches) {
                 updateDots(touch.clientX, touch.clientY);
             }
         } else {
-            updateDots(e.clientX, e.clientY);
+            y = e.clientY + adjuster.offsetHeight;
+            updateDots(e.clientX, y);
         }
-
     };
 
     const resetDotsColor = () => {
         dots.forEach(dot => {
-            dot.color = 'white';
+            dot.color = dark;
         });
     };
 
@@ -89,7 +161,7 @@
             ctx.beginPath();
             ctx.arc(dot.x, dot.y, 3, 0, Math.PI * 2);
             ctx.fill();
-            ctx.fillStyle = dot.color || 'white';
+            ctx.fillStyle = dot.color || dark;
             dot.x = lerp(dot.x, dot.ox, 0.1);
             dot.y = lerp(dot.y, dot.oy, 0.1);
             
@@ -101,7 +173,7 @@
         dots.length = 0;
         for (let y = 0; y < canvas.height; y += gridSize) {
             for (let x = 0; x < canvas.width; x += gridSize) {
-                dots.push({ x: x, y: y, ox: x, oy: y, color: 'white' });
+                dots.push({ x: x, y: y, ox: x, oy: y, color: dark });
             }
         }
     };
@@ -114,9 +186,6 @@
 
     canvas.addEventListener('mousemove', handleMove);
     canvas.addEventListener('touchmove', handleMove);
-
-    canvas.addEventListener('mouseup', resetDotsColor);
-    canvas.addEventListener('touchend', resetDotsColor);
 
     initializeDots();
     draw();
