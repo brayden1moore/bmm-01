@@ -100,7 +100,7 @@
         }
         .wav-container {
             justify-content: space-between;
-            width: 525px;
+            width: 660px;
             padding-left: 10px;
             border: 1px solid var(--primary-color);
             font-family: courier;
@@ -137,5 +137,8 @@
             }
             .about {
                 width: max-content;
+            }
+            .wav-container {
+                width: auto;
             }
         }
