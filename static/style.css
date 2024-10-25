@@ -109,6 +109,14 @@
             display: flex;
             align-items: center;
         }
+        .widget {
+            border-radius: 0px;
+            border: 1px solid var(--secondary-color);
+            background-color: black;
+        }
+        .g-background-default {
+            background-color: #FFFF00;
+        }
         .about {
             color: var(--secondary-color);
             font-family: Courier;
