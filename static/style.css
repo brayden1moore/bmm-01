@@ -109,13 +109,13 @@
             display: flex;
             align-items: center;
         }
-        .widget {
-            border-radius: 0px;
+        #widget {
+            border-radius: 0x !important;
             border: 1px solid var(--secondary-color);
             background-color: black;
         }
         .g-background-default {
-            background-color: #FFFF00;
+            background-color: #FFFF00 !important;
         }
         .about {
             color: var(--secondary-color);
