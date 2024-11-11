@@ -76,6 +76,7 @@
             color: black;
         }
         .image-div {
+            margin-top: 10px;
             width: 96vw;
             overflow: hidden;
             display: block;
