@@ -4,7 +4,7 @@
         }
         body {
             background-color: black;
-            font-family: Helvetica;
+            font-family: serif;
             color: var(--primary-color);
             width: 100vw;  
         }
@@ -28,6 +28,7 @@
         #welcome {
             font-size: 97.5px;
             margin: 0;
+            font-weight: normal;
             margin-left: 10px;
         }
         .dividing-line {
@@ -47,7 +48,7 @@
             border: 1px solid var(--primary-color);
         }
         p {
-            font-family: Courier;
+            font-family: serif;
             margin: 0;
             margin-top: 5px;
         }
@@ -64,7 +65,7 @@
         #nav-item {
             cursor: pointer;
             color: var(--secondary-color);
-            font-family: courier;
+            font-family: Serif;
             margin-right: 10px;
             list-style: none;
             border: 1px solid var(--secondary-color);
@@ -75,15 +76,15 @@
             color: black;
         }
         .image-div {
-            width: 100%;
-            overflow-x: scroll;
-            display: inline-flex;
+            width: 96vw;
+            overflow: hidden;
+            display: block;
         }
         .image {
             border: 1px var(--secondary-color) solid;
             height: 200px;
-            margin-right: 10px;
-            margin-top: 10px;
+            margin-right: 1px;
+            margin-top: 1px;
         }
         ::-webkit-scrollbar {
             height: 5px;
@@ -104,7 +105,7 @@
             width: 660px;
             padding-left: 10px;
             border: 1px solid var(--primary-color);
-            font-family: courier;
+            font-family: Serif;
             margin-top: 10px;
             display: flex;
             align-items: center;
@@ -119,13 +120,13 @@
         }
         .about {
             color: var(--secondary-color);
-            font-family: Courier;
+            font-family: Serif;
             margin-top: 10px;
         }
         .text-link {
             width: max-content;
             margin-top: 10px;
-            font-family: courier;
+            font-family: Serif;
             color: var(--secondary-color);
             text-decoration: underline !important;
         }
