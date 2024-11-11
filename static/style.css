@@ -77,13 +77,14 @@
         }
         .image-div {
             margin-top: 10px;
-            width: 96vw;
+            width: 100vw;
             overflow: hidden;
             display: block;
         }
         .image {
             border: 1px var(--secondary-color) solid;
-            height: 200px;
+            height: 250px;
+            width: 325px;
             margin-right: 1px;
             margin-top: 1px;
         }
@@ -144,8 +145,13 @@
         .link:hover {
             opacity: 0.5;
         }
-
+        .code {
+            width: 47%
+        }
         @media only screen and (width <= 798px) {
+            .code {
+                width: 97%;
+            }
             #soundcloud-player {
                 width: 90vw;
             }
@@ -157,6 +163,7 @@
             }
             .image {
                 height: 100px;
+                width: 150px;
             }
             body {
                 width: 95vw;
