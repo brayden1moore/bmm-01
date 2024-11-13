@@ -179,7 +179,6 @@
         .link {
             z-index: 11;
             position: relative;
-            text-decoration: underline;
         }
         .link:hover {
             opacity: 0.5;
