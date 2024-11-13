@@ -7,66 +7,72 @@
     <title>Magnetic Dots 12-22-2023</title>
     <style>
         body {
-            background-color: black;
-            overflow: hidden;
+            margin: none;
+            background-color: transparent;
         }
 
         canvas {
-            background:black;
-            height: 80vh;
-            width: 100vw;
+            background:transparent;
+            height: 97vh;
+            width: 100%;
+        }
+
+        input[type="range"]:focus {
+        outline: none;
         }
 
         #adjuster-div {
+            position: relative;
+            top: -20vh;
+            background-color: transparent;
             opacity: 1;
             transition: 0.2s;
             position: relative;
-            z-index: 100;
+            z-index: 10;
             overflow: hidden;
-            display: flex;
-            justify-content: space-evenly;
+            display: none;
+            justify-content: center;
             font-family: monospace;
             color: yellow;
             margin-top: 5px;
+            width: 100vw;
         }
         #adjuster-div:hover {
             opacity: 1;
         }
 
         :root {
-            --slider-width: 30vw;
+            --slider-width: 100px;
             --slider-height: 10px;
         }
 
         input[type='range'] {
+            appearance: none;
             cursor: ew-resize;
             overflow: hidden;
+            background-color: transparent;
+            outline: none;
         }
 
         @media screen and (-webkit-min-device-pixel-ratio:0) {
             input[type='range'] {
                 accent-color: yellow;
                 width: var(--slider-width);
-                background-color: #000;
+                background-color: transparent;
                 border: solid 1px yellow;
 
             }
         }
 
-        @media only screen and (min-width: 768px) {
-            canvas {
-                height: 95vh;
-            }
-        }
 
     </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
     <div id="adjuster-div">
-        <label><input type="range" id="gridSizeSlider" min="10" max="100" value="30"></label>
-        <label><input type="range" id="attractionSlider" min="-1" max="1" step="0.01" value="0.06"></label>
-        <label><input type="range" id="attractionRadiusSlider" min="1" max="25" step="0.1" value="7"></label>
+        <label><input type="range" id="gridSizeSlider" min="10" max="34" value="18"></label>
+        <label><input type="range" id="attractionSlider" min="-1" max="1.04" step="0.01" value="0.14"></label>
+        <label><input type="range" id="attractionRadiusSlider" min="1" max="25" step="0.1" value="11"></label>
     </div>
 
 </body>
@@ -75,7 +81,8 @@
     const gridSizeSlider = document.getElementById('gridSizeSlider');
     const attractionSlider = document.getElementById('attractionSlider');
     const attractionRadiusSlider = document.getElementById('attractionRadiusSlider');
-    const dark = '#545404';
+    //const dark = '#545404';
+    const dark = 'transparent';
 
     let gridSize = parseInt(gridSizeSlider.value); 
     let attraction = parseFloat(attractionSlider.value);
@@ -104,6 +111,8 @@
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    
+    let timeout;
 
     const updateDots = (clientX, clientY) => {
             dots.forEach(dot => {
@@ -127,6 +136,12 @@
                 }
 
             });
+
+            // Clear previous timeout if mouse is still moving
+            clearTimeout(timeout);
+
+            // Reset dots to dark after a delay if no movement is detected
+            timeout = setTimeout(resetDotsColor, 50);
         };
 
     const handleMove = (e) => {
@@ -155,8 +170,8 @@
             ctx.arc(dot.x, dot.y, 3, 0, Math.PI * 2);
             ctx.fill();
             ctx.fillStyle = dot.color || dark;
-            dot.x = lerp(dot.x, dot.ox, 0.1);
-            dot.y = lerp(dot.y, dot.oy, 0.1);
+            dot.x = lerp(dot.x, dot.ox, 0.2);
+            dot.y = lerp(dot.y, dot.oy, 0.2);
             
         });
         requestAnimationFrame(draw);

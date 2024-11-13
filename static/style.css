@@ -1,12 +1,15 @@
         :root {
-            --primary-color: rgb(220, 220, 0);
-            --secondary-color: rgb(220, 220, 0);
+            --primary-color: rgb(255, 255, 0);
+            --secondary-color: rgb(255, 255, 0);
         }
         body {
+            align-items: center;
+            justify-content: center;
             background-color: black;
             font-family: serif;
             color: var(--primary-color);
             width: 100vw;  
+            height: 90vh;
         }
         footer {
             display: flex;
@@ -15,33 +18,55 @@
             justify-content: left;
         }
         #logo-img {
-            width: 100px;
+            z-index: 100;
+            width: 150px;
+            position: relative;
+            top: 0;
+            left: 0;
             height: auto;
         }
         #header {
             margin-top: 10px;
             margin-left: 10px;
             display: inline-flex;
-            width: max-content;
+            width: 100%;
             align-items: center;
+            justify-content: center;
         }
         #welcome {
-            font-size: 80px;
+            font-size: 150px;
             margin: 0;
             font-weight: normal;
             margin-left: 10px;
         }
         .dividing-line {
             margin-top: 20px;
-            width: 110%;
+            margin-bottom: 10px;
+            width: 88px;
             border-bottom: 1px solid ;
+        }
+        #curves {
+            z-index: -1;
+            top: 0;
+            position: absolute;
+            height: 100vh;
+            width: 100%;
+            border: none;
+        }
+        #dots {
+            z-index: 0;
+            top: 0;
+            position: absolute;
+            height: 100vh;
+            width: 100%;
+            border: none;
+            margin: 0;
         }
         #content {
             display: grid;
             width: 100%;
-            margin: 10px;
-            justify-items: left;
-            justify-content: left;
+            justify-items: center;
+            justify-content: center;
         }
         #link-container {
             height: 100%;
@@ -57,12 +82,17 @@
             text-decoration: none;
         }
         #nav {
-            margin: 10px;
+            z-index: 10;
             padding: 0;
             display: flex;
             height: auto;
+            width: 100%;
+            justify-content: center;
         }
         #nav-item {
+            z-index: 10;
+            position: relative;
+            background-color: black;
             cursor: pointer;
             color: var(--secondary-color);
             font-family: Serif;
@@ -70,16 +100,17 @@
             list-style: none;
             border: 1px solid var(--secondary-color);
             padding: 10px;
+            transition: 0.1s ease;
+            font-size: larger;
         }
         #nav-item:hover {
             background-color: var(--secondary-color);
             color: black;
         }
         .image-div {
+            display: none;
             margin-top: 9px;
             width: 100vw;
-            overflow: hidden;
-            display: block;
         }
         .image {
             border: 1px var(--secondary-color) solid;
@@ -121,9 +152,13 @@
             background-color: #FFFF00 !important;
         }
         .about {
+            z-index: 1;
+            position: relative;
             color: var(--secondary-color);
             font-family: Serif;
             margin-top: 10px;
+            text-align: center;
+            width: max-content;
         }
         .text-link {
             width: max-content;
@@ -140,13 +175,12 @@
             height: 700px;
         }
         .link {
+            z-index: 11;
+            position: relative;
             text-decoration: underline;
         }
         .link:hover {
             opacity: 0.5;
-        }
-        .code {
-            width: 47%
         }
         @media only screen and (width <= 798px) {
             .code {
@@ -156,7 +190,7 @@
                 width: 90vw;
             }
             #welcome {
-                font-size: 50px;
+                font-size: 80px;
             }
             #logo-img {
                 width: 50px;
@@ -166,7 +200,7 @@
                 width: 150px;
             }
             body {
-                width: 95vw;
+                width: 92vw;
                 font-size: small;
             }
             .about {

@@ -12,6 +12,8 @@
     <script>
         var t;
         var dark = true;
+
+        window.addEventListener('resize',draw());
     
         function setup() {
             createCanvas(windowWidth, windowHeight);
@@ -23,8 +25,8 @@
         }
         
         function draw() {
-            const windowHeight = window.height + mouseY/2;
-            const windowWidth = window.width + mouseX/2;
+            const windowHeight = window.height ;//+ mouseY/2;
+            const windowWidth = window.width ;//+ mouseX/2;
 
             var x1 = windowWidth + noise(t + 645);
             var x2 = windowWidth * noise(t + 114);
@@ -48,7 +50,7 @@
             bezier(x5, y5, x6, y6, x7, y7, x8, y8);
             
             t += 0.005
-            updateTBasedOnMouseVelocity();
+            //updateTBasedOnMouseVelocity();
     
         }
 
@@ -65,7 +67,7 @@
 
         function mouseClicked() {
             dark = !dark;  
-            setColors(); 
+            //setColors(); 
         }
 
         function setColors() {
