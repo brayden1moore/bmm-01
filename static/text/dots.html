@@ -12,9 +12,12 @@
         }
 
         canvas {
+            position: relative;
             background:transparent;
-            height: 97vh;
+            height: 100%;
             width: 100%;
+            overflow:visible;
+            transition: 0.2s ease;
         }
 
         input[type="range"]:focus {
@@ -81,7 +84,7 @@
     const gridSizeSlider = document.getElementById('gridSizeSlider');
     const attractionSlider = document.getElementById('attractionSlider');
     const attractionRadiusSlider = document.getElementById('attractionRadiusSlider');
-    const dark = '#101000';
+    const dark = '#404000';
     //const dark = 'transparent';
 
     let gridSize = parseInt(gridSizeSlider.value); 
@@ -126,14 +129,15 @@
                 newX = dot.x + distanceToMoveX;
                 newY = dot.y + distanceToMoveY;
                 
-                if ((dist < attractionRadius - 10) | (dist < attractionRadius + 10)) {
+                if ((dist < (attractionRadius))) {
                     dot.x = newX;
                     dot.y = newY;
-                    dot.color = 'yellow';
-                    
-                }
-                else { 
-                    dot.color = dark;
+                    if ((dist < (attractionRadius/1.25))) {
+                        dot.color = 'yellow';
+                    }
+                    else {
+                        dot.color = dark;
+                    }
                 }
 
             });
@@ -168,11 +172,11 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         dots.forEach(dot => {
             ctx.beginPath();
-            ctx.arc(dot.x, dot.y, 2, 0, Math.PI * 2);
+            ctx.arc(dot.x, dot.y, 1, 0, Math.PI * 2);
             ctx.fill();
             ctx.fillStyle = dot.color || dark;
-            dot.x = lerp(dot.x, dot.ox, 0.2);
-            dot.y = lerp(dot.y, dot.oy, 0.2);
+            dot.x = lerp(dot.x, dot.ox, 0.22);
+            dot.y = lerp(dot.y, dot.oy, 0.22);
             
         });
         requestAnimationFrame(draw);
@@ -182,7 +186,7 @@
         dots.length = 0;
         for (let y = 0; y < canvas.height; y += gridSize) {
             for (let x = 0; x < canvas.width; x += gridSize) {
-                dots.push({ x: x, y: y, ox: x, oy: y, color: dark });
+                    dots.push({ x: x, y: y, ox: x, oy: y, color: dark });
             }
         }
     };

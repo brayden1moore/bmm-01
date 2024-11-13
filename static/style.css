@@ -60,6 +60,7 @@
             width: 100%;
             border: none;
             margin: 0;
+            overflow: visible;
         }
         #content {
             display: grid;
@@ -87,6 +88,10 @@
             height: auto;
             width: 100%;
             justify-content: center;
+        }
+        mark {
+            background-color: black;
+            color: #FFFF00;
         }
         #nav-item {
             z-index: 10;
