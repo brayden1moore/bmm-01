@@ -167,7 +167,7 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         dots.forEach(dot => {
             ctx.beginPath();
-            ctx.arc(dot.x, dot.y, 3, 0, Math.PI * 2);
+            ctx.arc(dot.x, dot.y, 2, 0, Math.PI * 2);
             ctx.fill();
             ctx.fillStyle = dot.color || dark;
             dot.x = lerp(dot.x, dot.ox, 0.2);

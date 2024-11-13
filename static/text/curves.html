@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.min.js"></script>
     <meta charset="utf-8"/>
     <link rel="shortcut icon" type="image/x-icon" href="https://bmm-01.net/static/images/bmm-01-circle.ico?format=100w">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,75 +10,51 @@
   </head>
   <body style="margin:0">
     <script>
-        var t;
-        var dark = true;
+        new p5();
+        let t=0;
 
         window.addEventListener('resize',draw());
     
         function setup() {
-            createCanvas(windowWidth, windowHeight);
-            prevMouseX = mouseX;
-            prevMouseY = mouseY;
-            t = 0;    
+            createCanvas(windowWidth, windowHeight);  
             noFill();  
-            setColors();
+            fill(0);
+            stroke(255,255,0);
+            background(0);
         }
         
         function draw() {
-            const windowHeight = window.height ;//+ mouseY/2;
-            const windowWidth = window.width ;//+ mouseX/2;
+            clear();
 
-            var x1 = windowWidth + noise(t + 645);
-            var x2 = windowWidth * noise(t + 114);
-            var x3 = windowWidth * noise(t + 565);
-            var x4 = windowWidth * noise(t + 28);
-            var y1 = windowHeight * noise(t + 22);
-            var y2 = windowHeight * noise(t + 83);
-            var y3 = windowHeight * noise(t + 358);
-            var y4 = windowHeight + noise(t + windowHeight);
-            
-            var x5 = noise(t + 545);
-            var x6 = windowWidth * noise(t + 114);
-            var x7 = windowWidth * noise(t + 565);
-            var x8 = windowWidth * noise(t + 298);
-            var y5 = windowHeight * noise(t + 22);
-            var y6 = windowHeight * noise(t + 83);
-            var y7 = windowHeight * noise(t + 358);
-            var y8 = noise(t + windowHeight);
-            
+            const windowHeight = window.height + 100;
+            const windowWidth = window.width + 100;
+
+            let x1 = windowWidth + noise(t + 645);
+            let x2 = windowWidth * noise(t + 114);
+            let x3 = windowWidth * noise(t + 565);
+            let x4 = windowWidth * noise(t + 28);
+            let y1 = windowHeight * noise(t + 22);
+            let y2 = windowHeight * noise(t + 83);
+            let y3 = windowHeight * noise(t + 358);
+            let y4 = windowHeight + noise(t + windowHeight);
+
+            let x5 = noise(t + 545);
+            let x6 = windowWidth * noise(t + 114);
+            let x7 = windowWidth * noise(t + 565);
+            let x8 = windowWidth * noise(t + 298);
+            let y5 = windowHeight * noise(t + 22);
+            let y6 = windowHeight * noise(t + 83);
+            let y7 = windowHeight * noise(t + 358);
+            let y8 = noise(t + windowHeight);
+
             bezier(x1, y1, x2, y2, x3, y3, x4, y4);
             bezier(x5, y5, x6, y6, x7, y7, x8, y8);
-            
-            t += 0.005
-            //updateTBasedOnMouseVelocity();
-    
-        }
 
-        function updateTBasedOnMouseVelocity() {
-            let dx = mouseX - prevMouseX;
-            let dy = mouseY - prevMouseY;
-            let velocity = sqrt(dx * dx + dy * dy);
+            t += 0.002;
 
-            t += velocity * 0.0005;  
-
-            prevMouseX = mouseX;
-            prevMouseY = mouseY;
-        }
-
-        function mouseClicked() {
-            dark = !dark;  
-            //setColors(); 
-        }
-
-        function setColors() {
-            if (dark) {
-                fill(0);
-                stroke(255,255,0);
-                background(0);
-            } else {
-                fill(255,255,0);
-                stroke(0);
-                background(255,255,0);
+            // Stop drawing once alpha reaches zero
+            if (alpha <= 0) {
+                noLoop();
             }
         }
     
