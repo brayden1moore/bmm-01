@@ -213,6 +213,9 @@
                 width: auto;
             }
         
+            #nav {
+                margin-top: 60px;
+            }
             #nav-item {
                 font-size: small;
             }
