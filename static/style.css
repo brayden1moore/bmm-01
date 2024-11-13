@@ -212,4 +212,8 @@
             .wav-container {
                 width: auto;
             }
+        
+            #nav-item {
+                font-size: small;
+            }
         }
