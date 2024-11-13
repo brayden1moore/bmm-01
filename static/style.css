@@ -161,6 +161,7 @@
             margin-top: 10px;
             text-align: center;
             width: max-content;
+            margin-bottom: 20px;
         }
         .text-link {
             width: max-content;
@@ -182,6 +183,16 @@
         }
         .link:hover {
             opacity: 0.5;
+        }
+        #dots {
+            left: 0;
+            width: 100vw;
+        }
+        #about-content {
+            display: flex;
+            width: 100%;
+            justify-items: center;
+            justify-content: space-evenly;
         }
         @media only screen and (width <= 798px) {
             .code {
@@ -212,16 +223,14 @@
             .wav-container {
                 width: auto;
             }
-
-            #dots {
-                left: 0;
-                width: 100vw;
-            }
         
             #nav {
                 margin-top: 10px;
             }
             #nav-item {
                 font-size: small;
+            }
+            #about-content {
+                display: grid;
             }
         }
