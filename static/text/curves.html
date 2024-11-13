@@ -18,13 +18,12 @@
         function setup() {
             createCanvas(windowWidth, windowHeight);  
             noFill();  
-            fill(0);
             stroke(255,255,0);
             background(0);
         }
         
         function draw() {
-            clear();
+            background(0, 10);
 
             const windowHeight = window.height + 100;
             const windowWidth = window.width + 100;
@@ -50,12 +49,7 @@
             bezier(x1, y1, x2, y2, x3, y3, x4, y4);
             bezier(x5, y5, x6, y6, x7, y7, x8, y8);
 
-            t += 0.002;
-
-            // Stop drawing once alpha reaches zero
-            if (alpha <= 0) {
-                noLoop();
-            }
+            t += Math.random()/100;
         }
     
         

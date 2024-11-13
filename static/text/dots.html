@@ -81,8 +81,8 @@
     const gridSizeSlider = document.getElementById('gridSizeSlider');
     const attractionSlider = document.getElementById('attractionSlider');
     const attractionRadiusSlider = document.getElementById('attractionRadiusSlider');
-    //const dark = '#545404';
-    const dark = 'transparent';
+    const dark = '#101000';
+    //const dark = 'transparent';
 
     let gridSize = parseInt(gridSizeSlider.value); 
     let attraction = parseFloat(attractionSlider.value);
@@ -126,10 +126,11 @@
                 newX = dot.x + distanceToMoveX;
                 newY = dot.y + distanceToMoveY;
                 
-                if (dist < attractionRadius) {
+                if ((dist < attractionRadius - 10) | (dist < attractionRadius + 10)) {
                     dot.x = newX;
                     dot.y = newY;
                     dot.color = 'yellow';
+                    
                 }
                 else { 
                     dot.color = dark;
@@ -141,7 +142,7 @@
             clearTimeout(timeout);
 
             // Reset dots to dark after a delay if no movement is detected
-            timeout = setTimeout(resetDotsColor, 50);
+            timeout = setTimeout(resetDotsColor, 75);
         };
 
     const handleMove = (e) => {
