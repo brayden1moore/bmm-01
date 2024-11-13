@@ -37,7 +37,7 @@
             font-size: 150px;
             margin: 0;
             font-weight: normal;
-            margin-left: 10px;
+            margin-left: 0px;
         }
         .dividing-line {
             margin-top: 20px;
@@ -101,7 +101,7 @@
             border: 1px solid var(--secondary-color);
             padding: 10px;
             transition: 0.1s ease;
-            font-size: larger;
+            font-size:medium;
         }
         #nav-item:hover {
             background-color: var(--secondary-color);
@@ -200,7 +200,7 @@
                 width: 150px;
             }
             body {
-                width: 92vw;
+                width: 98vw;
                 font-size: small;
             }
             .about {
