@@ -27,7 +27,6 @@
         }
         #header {
             margin-top: 10px;
-            margin-left: 10px;
             display: inline-flex;
             width: 100%;
             align-items: center;
@@ -193,10 +192,11 @@
                 margin-top: 10px;
             }
             #welcome {
-                font-size: 80px;
-            }
+                margin-top: 80px;
+                font-size: 100px;
+            }            
             #logo-img {
-                width: 50px;
+                width: 60px;
             }
             .image {
                 height: 100px;
