@@ -212,6 +212,11 @@
             .wav-container {
                 width: auto;
             }
+
+            #dots {
+                left: 0;
+                width: 100vw;
+            }
         
             #nav {
                 margin-top: 10px;
